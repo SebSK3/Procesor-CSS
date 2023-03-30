@@ -13,8 +13,7 @@ class CMD {
 
   private:
     CSS *css;
-    void CMD_QUESTIONMARK(char *input);
-    void FreeTokens(char **tokens);
+    const void CMD_QUESTIONMARK(char *input);
     void CheckForDeletion(DoubleLinkedList *list);
     void D(char *input, char **tokens);
     Section *GetNthSection(int n);

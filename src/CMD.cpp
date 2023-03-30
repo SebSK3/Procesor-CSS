@@ -1,7 +1,7 @@
 #include "CMD.hpp"
 #include "CSS.hpp"
 
-void CMD::CMD_QUESTIONMARK(char *input) {
+const void CMD::CMD_QUESTIONMARK(char *input) {
 
     int count = 0;
     DoubleLinkedList *tempList = css->list;
@@ -283,15 +283,6 @@ void CMD::D(char *input, char **tokens) {
             CheckForDeletion(list);
         }
     }
-}
-
-void CMD::FreeTokens(char **tokens) {
-    int i=0;
-    while (tokens[i] != NULL) {
-        free(tokens[i]);
-        i++;
-    }
-    free(tokens);
 }
 
 void CMD::Execute(char *input, CSS *cssIn) {

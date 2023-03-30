@@ -7,7 +7,7 @@ struct Selectors {
     Selectors *head = NULL;
     char *name;
 
-    bool checkForDuplicate(char *dupName) {
+    const bool checkForDuplicate(char *dupName) {
         Selectors *temp = head;
         bool exists = false;
         while (temp != NULL) {
@@ -19,7 +19,7 @@ struct Selectors {
         }
         return exists;
     }
-    void append(Selectors *element) {
+    const void append(Selectors *element) {
         element->next = NULL;
         Selectors *temp = head;
         while (temp->next != NULL) {

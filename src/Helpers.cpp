@@ -138,6 +138,15 @@ inline char *buildSelectorName(char **tokens, int tokensLength, int &i) {
     return name;
 }
 
+inline void FreeTokens(char **tokens) {
+    int i=0;
+    while (tokens[i] != NULL) {
+        free(tokens[i]);
+        i++;
+    }
+    free(tokens);
+}
+
 #ifdef DEBUG
 inline void DUMP_ALL_TOKENS(char **tokens) {
     int i = 0;

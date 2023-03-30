@@ -6,17 +6,16 @@ struct Section {
     Selectors *selectors = NULL;
     Attributes *attributes = NULL;
     void emptySection() {
-        Selectors *deletingSelector;
-        Attributes *deletingAttribute;
         Selectors *tempSelector = selectors;
         while (tempSelector != NULL) {
-            deletingSelector = tempSelector;
+            Selectors *deletingSelector = tempSelector;
             tempSelector = tempSelector->next;
             free(deletingSelector->name);
             free(deletingSelector);
         }
         Attributes *tempAttribute = attributes;
         while (tempAttribute != NULL) {
+            Attributes *deletingAttribute;
             deletingAttribute = tempAttribute;
             tempAttribute = tempAttribute->next;
             free(deletingAttribute->value);
