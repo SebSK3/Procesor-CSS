@@ -5,7 +5,7 @@ CSS::CSS() {
     cmd = (CMD *)malloc(sizeof(CMD));
     currentSection = NULL;
     insideBlock = false;
-    list = (DoubleLinkedList *)malloc(sizeof(DoubleLinkedList));
+    list = new DoubleLinkedList;
     list->init();
     currentList = list;
     currentSection = &(list->sections[0]);
@@ -17,7 +17,7 @@ CSS::~CSS() {
         DoubleLinkedList *deletingList = temp;
         temp->empty();
         temp = temp->next;
-        free(deletingList);
+        delete deletingList;
     }
     free(cmd);
 }

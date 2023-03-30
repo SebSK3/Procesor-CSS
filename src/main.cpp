@@ -1,6 +1,3 @@
-// Disable "C style pointer casting"
-#pragma warning(push)
-#pragma warning(disable : 4363)
 #include "CSS.hpp"
 
 
