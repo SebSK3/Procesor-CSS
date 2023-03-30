@@ -1,0 +1,39 @@
+{padding: none;
+color : blue; }
+
+h1.abc:nth-child() + h2:abc(), h5
+{
+   color: blue ;
+  background:blue;
+  color:red
+}
+
+h1:abc + h2:abc, h5 { color:red}
+
+h1::test p , h2{padding : none;background:white}
+
+{ padding: blue; }
+????
+?
+padding,E,h2
+color,A,?
+2,A,?
+2,D,*
+color,A,?
+1,A,?
+?
+****
+
+--webkit.Class:after .all::before , h2-p {
+background: white, "BLACK ";
+transform:none
+}
+
+????
+?
+
+****
+{ elo:no; }
+????
+?
+background,A,?
