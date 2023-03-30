@@ -19,7 +19,7 @@ CSS::~CSS() {
         temp = temp->next;
         delete deletingList;
     }
-    free(cmd);
+    delete cmd;
 }
 
 void CSS::SetSectionTaken(Section *section) {

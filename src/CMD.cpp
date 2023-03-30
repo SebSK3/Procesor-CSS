@@ -2,7 +2,6 @@
 #include "CSS.hpp"
 
 CMD::CMD(CSS *cssIn) {
-
     css = cssIn;
 }
 
