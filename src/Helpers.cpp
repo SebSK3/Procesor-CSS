@@ -77,19 +77,6 @@ inline bool tokenIsAttribute(char **tokens, int length, int i) {
     return false;
 }
 
-inline bool inputIsAttribute(char *input, unsigned int i) {
-    while (i < strlen(input)) {
-        if (input[i] == ';') {
-            return true;
-        }
-        if (input[i] == '{' || input[i] == '}') {
-            return false;
-        }
-        i++;
-    }
-    return false;
-}
-
 inline char *SelectorName(char *in1, char *in2, char *in3) {
     char *out = (char *)malloc(sizeof(char) *
                                (strlen(in1) + strlen(in2) + strlen(in3) + 1));

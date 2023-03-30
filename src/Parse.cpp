@@ -21,11 +21,10 @@ char **Parse::tokenize(char *input, const char *keychars, bool insideBrackets) {
 
     int builderIndex = 0;
     char *token;
-    bool isDelimiter, isKeychar;
 
     for (unsigned int charIndex = 0; charIndex < strlen(input); charIndex++) {
-        isDelimiter = isInside(input[charIndex], delimiters);
-        isKeychar = isInside(input[charIndex], keychars);
+        bool isDelimiter = isInside(input[charIndex], delimiters);
+        bool isKeychar = isInside(input[charIndex], keychars);
 
         if (isKeychar) {
             /*  If builderIndex > 0, then there is still word

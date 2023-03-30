@@ -5,7 +5,7 @@ CSS::CSS() {
     cmd = (CMD *)malloc(sizeof(CMD));
     currentSection = NULL;
     insideBlock = false;
-    list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
+    list = (DoubleLinkedList *)malloc(sizeof(DoubleLinkedList));
     list->init();
     currentList = list;
     currentSection = &(list->sections[0]);
@@ -13,9 +13,8 @@ CSS::CSS() {
 
 CSS::~CSS() {
     DoubleLinkedList *temp = list;
-    DoubleLinkedList *deletingList;
     while (temp != NULL) {
-        deletingList = temp;
+        DoubleLinkedList *deletingList = temp;
         temp->empty();
         temp = temp->next;
         free(deletingList);
@@ -24,7 +23,7 @@ CSS::~CSS() {
 }
 
 void CSS::SetSectionTaken(Section *section) {
-    for (int i=0; i<T; i++) {
+    for (int i = 0; i < T; i++) {
         if (&(currentList->sections[i]) == section) {
             currentList->alreadyTaken[i] = true;
             return;
@@ -104,10 +103,10 @@ void CSS::Extract(char **tokens, int tokensLength) {
                 }
                 /* Skip this attribute */
                 if (i + 2 < tokensLength)
-                    free(tokens[i+1]);
-                    i = i + 2;
+                    free(tokens[i + 1]);
+                i = i + 2;
                 if (i + 1 < (tokensLength) && *tokens[i + 1] == ';') {
-                    free(tokens[i+1]);
+                    free(tokens[i + 1]);
                     i++;
                 }
 
@@ -121,7 +120,6 @@ void CSS::Extract(char **tokens, int tokensLength) {
     std::cout << "[ok] TOKENS EXTRACTED SUCCESSFULLY" << std::endl;
 #endif
 }
-
 
 void appendToLine(char **line, char c, int lineAllocs, int &index) {
     if (index >= MAX_DEFAULT_LENGTH - 2) {
@@ -150,8 +148,7 @@ void CSS::ParseInput(char *line, bool &CSSMODE) {
 }
 
 void CSS::GetInput() {
-    char *line = (char *)malloc(sizeof(char) *
-                                MAX_DEFAULT_LENGTH); 
+    char *line = (char *)malloc(sizeof(char) * MAX_DEFAULT_LENGTH);
     bool CSSMODE = true;
     int lineAllocs = 1;
     char c;
