@@ -55,7 +55,7 @@ struct DoubleLinkedList {
             	break;
             }
         }
-        if (!found && temp->alreadyTaken[0] == false && temp->alreadyTaken[1] == false) { // chyba tu coś nie tak, wrzuca do poprzedniej
+        if (!found && temp->alreadyTaken[0] == false && temp->alreadyTaken[1] == false) {
             section = &(temp->sections[0]);
         } else {
             DoubleLinkedList *list = (DoubleLinkedList *)malloc(sizeof(DoubleLinkedList));

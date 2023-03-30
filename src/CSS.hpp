@@ -19,7 +19,6 @@ class CSS {
     Section *currentSection;
     DoubleLinkedList *list;
     DoubleLinkedList *currentList;
-    //int listSize;
 
   private:
     bool insideBlock;

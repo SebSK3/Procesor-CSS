@@ -152,11 +152,11 @@ Section *CMD::GetNthSection(int n) {
     int i = 0;
     DoubleLinkedList *tempList = css->list;
     while (tempList != NULL) {
-        // if (n > (i + (tempList->sizeTaken-1))) {
-        //     i = i + tempList->sizeTaken-1;
-        //     tempList = tempList->next;
-        //     continue;
-        // }
+        if (n > (i + (tempList->sizeTaken))) {
+            i = i + tempList->sizeTaken;
+            tempList = tempList->next;
+            continue;
+        }
         for (int j = 0; j < T; j++) {
 
             if (tempList->alreadyTaken[j]) {
@@ -197,11 +197,11 @@ bool CMD::DeleteNthSection(int n) {
     int i = 0;
     DoubleLinkedList *tempList = css->list;
     while (tempList != NULL) {
-        // if (n > (i + tempList->sizeTaken-1)) {
-        //     i = i + tempList->sizeTaken-1;
-        //     tempList = tempList->next;
-        //     continue;
-        // }
+        if (n > (i + tempList->sizeTaken)) {
+            i = i + tempList->sizeTaken;
+            tempList = tempList->next;
+            continue;
+        }
         for (int j = 0; j < T; j++) {
 
             if (tempList->alreadyTaken[j]) {
@@ -222,8 +222,6 @@ bool CMD::DeleteNthSection(int n) {
 }
 
 void CMD::CheckForDeletion(DoubleLinkedList *list) {
-    // TEST 14 ma invalid write tutaj
-    // pewnie coś nie tak z przepisywaniem
     if (list != NULL)
     if (list->sizeTaken == 0) {
         for (int i=0; i<T; i++) {
@@ -241,7 +239,7 @@ void CMD::CheckForDeletion(DoubleLinkedList *list) {
             list->empty();
             free(list);
         } else if (list->previous != NULL && list->next != NULL) {
-            list->previous->next = list->next; // dokładnie o tu
+            list->previous->next = list->next;
             list->next->previous = list->previous;
             list->empty();
             free(list);

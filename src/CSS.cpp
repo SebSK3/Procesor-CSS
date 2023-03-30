@@ -9,7 +9,6 @@ CSS::CSS() {
     list->init();
     currentList = list;
     currentSection = &(list->sections[0]);
-    // AppendSection();
 }
 
 CSS::~CSS() {
@@ -22,16 +21,6 @@ CSS::~CSS() {
         free(deletingList);
     }
     free(cmd);
-    // Sections *tempSection = sections;
-
-    // Sections *deletingSection;
-    // while (tempSection != NULL) {
-    //     deletingSection = tempSection;
-    //     tempSection = tempSection->next;
-    //     deletingSection->deleteSection();
-    //     free(deletingSection);
-    // }
-    // free(cmd);
 }
 
 void CSS::SetSectionTaken(Section *section) {
@@ -59,7 +48,6 @@ void CSS::Extract(char **tokens, int tokensLength) {
             if (currentList->next != NULL) {
                 currentList = currentList->next;
             }
-            // AppendSection();
             insideBlock = false;
             break;
         default:
