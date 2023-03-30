@@ -1,6 +1,11 @@
 #include "CMD.hpp"
 #include "CSS.hpp"
 
+CMD::CMD(CSS *cssIn) {
+
+    css = cssIn;
+}
+
 const void CMD::CMD_QUESTIONMARK(char *input) {
 
     int count = 0;
@@ -285,8 +290,7 @@ void CMD::D(char *input, char **tokens) {
     }
 }
 
-void CMD::Execute(char *input, CSS *cssIn) {
-    css = cssIn;
+void CMD::Execute(char *input) {
     const char *keychars = "{};";
     char **tokenized = Parse::tokenize(input, keychars, false);
 #ifdef DEBUG

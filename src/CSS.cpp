@@ -2,7 +2,7 @@
 #include "CMD.hpp"
 
 CSS::CSS() {
-    cmd = (CMD *)malloc(sizeof(CMD));
+    cmd = new CMD(this);
     currentSection = NULL;
     insideBlock = false;
     list = new DoubleLinkedList;
@@ -143,7 +143,7 @@ void CSS::ParseInput(char *line, bool &CSSMODE) {
     if (CSSMODE) {
         ParseCSS(line);
     } else {
-        cmd->Execute(line, this);
+        cmd->Execute(line);
     }
 }
 
