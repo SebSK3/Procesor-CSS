@@ -13,7 +13,7 @@ class CMD;
 class CSS {
 
   public:
-    void Init();
+    CSS();
     ~CSS();
     void GetInput();
     Section *currentSection;

@@ -3,7 +3,7 @@
 
 int main() {
     CSS *css = (CSS*)malloc(sizeof(CSS));
-    css->Init();
+    css = new (css) CSS();
     css->GetInput();
     css->~CSS();
     free(css);

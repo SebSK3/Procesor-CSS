@@ -1,9 +1,9 @@
 #include "CSS.hpp"
 #include "CMD.hpp"
 
-void CSS::Init() {
+CSS::CSS() {
     cmd = (CMD*)malloc(sizeof(CMD));
-    cmd->Init(this);
+    cmd = new (cmd) CMD(this);
     currentSection = NULL;
     insideBlock = false;
     list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));

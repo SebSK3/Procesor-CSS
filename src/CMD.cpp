@@ -1,7 +1,7 @@
 #include "CMD.hpp"
 #include "CSS.hpp"
 
-void CMD::Init(CSS *cssIn) {
+CMD::CMD(CSS *cssIn) {
     css = cssIn;
 }
 

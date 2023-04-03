@@ -59,6 +59,7 @@ struct DoubleLinkedList {
             section = &(temp->sections[0]);
         } else {
             DoubleLinkedList *list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
+            list = new (list) DoubleLinkedList();
             list->init();
             list->previous = this;
             section = list->addSection();
