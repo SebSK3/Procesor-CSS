@@ -2,10 +2,10 @@
 
 
 int main() {
-    CSS *css = (CSS*)malloc(sizeof(CSS));
-    css = new (css) CSS();
+    void *cssPtr = (CSS*)malloc(sizeof(CSS));
+    CSS *css = new (cssPtr) CSS();
     css->GetInput();
     css->~CSS();
-    free(css);
+    free(cssPtr);
     return 0;
 }
