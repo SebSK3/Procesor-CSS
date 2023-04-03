@@ -9,7 +9,7 @@ class CSS;
 
 class CMD {
   public:
-    explicit CMD(CSS *cssIn);
+    void Init(CSS* cssIn);
     void Execute(char *input);
 
   private:

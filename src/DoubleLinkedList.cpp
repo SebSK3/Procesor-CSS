@@ -58,7 +58,7 @@ struct DoubleLinkedList {
         if (!found && temp->alreadyTaken[0] == false && temp->alreadyTaken[1] == false) {
             section = &(temp->sections[0]);
         } else {
-            DoubleLinkedList *list = new DoubleLinkedList;
+            DoubleLinkedList *list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
             list->init();
             list->previous = this;
             section = list->addSection();

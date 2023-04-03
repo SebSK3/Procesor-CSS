@@ -1,11 +1,12 @@
 #include "CSS.hpp"
 #include "CMD.hpp"
 
-CSS::CSS() {
-    cmd = new CMD(this);
+void CSS::Init() {
+    cmd = (CMD*)malloc(sizeof(CMD));
+    cmd->Init(this);
     currentSection = NULL;
     insideBlock = false;
-    list = new DoubleLinkedList;
+    list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
     list->init();
     currentList = list;
     currentSection = &(list->sections[0]);
@@ -17,9 +18,9 @@ CSS::~CSS() {
         DoubleLinkedList *deletingList = temp;
         temp->empty();
         temp = temp->next;
-        delete deletingList;
+        free(deletingList);
     }
-    delete cmd;
+    free(cmd);
 }
 
 void CSS::SetSectionTaken(Section *section) {

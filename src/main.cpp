@@ -2,9 +2,10 @@
 
 
 int main() {
-    /* Use new instead of malloc, just so constructor will be called */
-    CSS *css = new CSS();
+    CSS *css = (CSS*)malloc(sizeof(CSS));
+    css->Init();
     css->GetInput();
-    delete css;
+    css->~CSS();
+    free(css);
     return 0;
 }

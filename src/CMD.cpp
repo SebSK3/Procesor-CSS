@@ -1,7 +1,7 @@
 #include "CMD.hpp"
 #include "CSS.hpp"
 
-CMD::CMD(CSS *cssIn) {
+void CMD::Init(CSS *cssIn) {
     css = cssIn;
 }
 
@@ -237,16 +237,16 @@ void CMD::CheckForDeletion(DoubleLinkedList *list) {
             css->list = list->next;
             css->list->previous = NULL;
             list->empty();
-            delete list;
+            free(list);
         } else if (list->next == NULL && list->previous != NULL) {
             list->previous->next = NULL;
             list->empty();
-            delete list;
+            free(list);
         } else if (list->previous != NULL && list->next != NULL) {
             list->previous->next = list->next;
             list->next->previous = list->previous;
             list->empty();
-            delete list;
+            free(list);
         }
     }
 }
