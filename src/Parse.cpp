@@ -1,7 +1,12 @@
 #include "Parse.hpp"
 
 void Parse::reallocBuilder(char **builder, int times) {
-    *builder = (char*)realloc(*builder, sizeof(char) * (times));
+    char *newBuilder = new char[MAX_DEFAULT_LENGTH + (REALLOC_BUILDER * times)];
+    for (int i=0; i<strlen(*builder); i++) {
+        newBuilder[i] = (*builder)[i];
+    }
+    delete[] *builder;
+    *builder = newBuilder;
     if (builder == NULL) {
         exit(-1);
     }
@@ -11,13 +16,13 @@ char **Parse::tokenize(char *input, const char *keychars, bool insideBrackets) {
     if (strlen(input) == 0) {
         return NULL;
     }
-    char **result = (char **)malloc(sizeof(char *));
+    char **result = new char*[MAX_DEFAULT_TOKENS];
     result[0] = NULL;
 
     int resultSize = 0;
     int builderAllocs = 1;
 
-    char *builder = (char *)malloc(sizeof(char) * MAX_DEFAULT_LENGTH + 1);
+    char *builder = new char[MAX_DEFAULT_LENGTH+1];
 
     int builderIndex = 0;
     char *token;
@@ -35,7 +40,7 @@ char **Parse::tokenize(char *input, const char *keychars, bool insideBrackets) {
                 token = buildString(builder, builderIndex);
                 if (strlen(token) > 0)
                     appendToResult(&result, token, resultSize);
-                else free(token);
+                else delete[] token;
             }
             /* Append keychar to result */
             builder[builderIndex] = input[charIndex];
@@ -86,12 +91,12 @@ char **Parse::tokenize(char *input, const char *keychars, bool insideBrackets) {
     if (builderIndex > 0) {
         token = buildString(builder, builderIndex);
         if (strlen(token) == 0) {
-            free(token);
+            delete[] token;
         } else {
         appendToResult(&result, token, resultSize);
         }
     }
-    free(builder);
+    delete[] builder;
     return result;
 }
 

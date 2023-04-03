@@ -10,17 +10,17 @@ struct Section {
         while (tempSelector != NULL) {
             Selectors *deletingSelector = tempSelector;
             tempSelector = tempSelector->next;
-            free(deletingSelector->name);
-            free(deletingSelector);
+            delete[] deletingSelector->name;
+            delete[] deletingSelector;
         }
         Attributes *tempAttribute = attributes;
         while (tempAttribute != NULL) {
             Attributes *deletingAttribute;
             deletingAttribute = tempAttribute;
             tempAttribute = tempAttribute->next;
-            free(deletingAttribute->value);
-            free(deletingAttribute->name);
-            free(deletingAttribute);
+            delete[] deletingAttribute->value;
+            delete[] deletingAttribute->name;
+            delete deletingAttribute;
         }
         attributes = NULL;
         selectors = NULL;

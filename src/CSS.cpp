@@ -37,10 +37,10 @@ void CSS::Extract(char **tokens, int tokensLength) {
         switch (*tokens[i]) {
         case '{':
             insideBlock = true;
-            free(tokens[i]);
+            delete tokens[i];
             break;
         case '}':
-            free(tokens[i]);
+            delete tokens[i];
             SetSectionTaken(currentSection);
             currentList->sizeTaken++;
             currentSection = currentList->addSection();
@@ -64,7 +64,7 @@ void CSS::Extract(char **tokens, int tokensLength) {
                     // AppendSection();
                 }
 
-                Selectors *selector = (Selectors *)malloc(sizeof(Selectors));
+                Selectors *selector = new Selectors;
                 selector->name = buildSelectorName(tokens, tokensLength, i);
 
                 /* If selector doesn't exist, then this selector is the head */
@@ -78,14 +78,14 @@ void CSS::Extract(char **tokens, int tokensLength) {
                     if (!exists)
                         currentSection->selectors->append(selector);
                     else {
-                        free(selector->name);
-                        free(selector);
+                        delete[] selector->name;
+                        delete selector;
                     }
                 }
             } else if (i + 1 < tokensLength && *tokens[i + 1] == ':') {
                 /* It's definietly attribute */
                 /* TODO: set as taken when parsing global attributes */
-                Attributes *attrib = (Attributes *)malloc(sizeof(Attributes));
+                Attributes *attrib = new Attributes;
                 attrib->name = tokens[i];
                 attrib->value = tokens[i + 2];
                 attrib->next = NULL;
@@ -98,21 +98,21 @@ void CSS::Extract(char **tokens, int tokensLength) {
                     if (!exists)
                         currentSection->attributes->append(attrib);
                     else {
-                        free(attrib);
+                        delete attrib;
                     }
                 }
                 /* Skip this attribute */
                 if (i + 2 < tokensLength)
-                    free(tokens[i + 1]);
+                    delete tokens[i + 1];
                 i = i + 2;
                 if (i + 1 < (tokensLength) && *tokens[i + 1] == ';') {
-                    free(tokens[i + 1]);
+                    delete tokens[i + 1];
                     i++;
                 }
 
                 break;
             } else {
-                free(tokens[i]);
+                delete tokens[i];
             }
         }
     }
@@ -123,10 +123,15 @@ void CSS::Extract(char **tokens, int tokensLength) {
 
 void appendToLine(char **line, char c, int lineAllocs, int &index) {
     if (index >= MAX_DEFAULT_LENGTH - 2) {
-        *line = (char *)realloc(*line, sizeof(char) *
-                                           (MAX_DEFAULT_LENGTH * lineAllocs));
-    }
+        char *newLine = new char[MAX_DEFAULT_LENGTH*lineAllocs];
+        for (int i=0; i<strlen(*line); i++) {
+            newLine[i] = (*line)[i];
+        }
+        delete[] *line;
+        *line = newLine;
 
+    }
+    
     (*line)[index] = c;
     index++;
 }
@@ -148,7 +153,7 @@ void CSS::ParseInput(char *line, bool &CSSMODE) {
 }
 
 void CSS::GetInput() {
-    char *line = (char *)malloc(sizeof(char) * MAX_DEFAULT_LENGTH);
+    char *line = new char[MAX_DEFAULT_LENGTH];
     bool CSSMODE = true;
     int lineAllocs = 1;
     char c;
@@ -170,7 +175,7 @@ void CSS::GetInput() {
         line[i] = '\0';
         ParseInput(line, CSSMODE);
     }
-    free(line);
+    delete[] line;
 }
 
 void CSS::ParseCSS(char *input) {
@@ -187,7 +192,7 @@ void CSS::ParseCSS(char *input) {
     }
 
     Extract(tokenized, i);
-    free(tokenized);
+    delete[] tokenized;
 #ifdef DEBUG
     DUMP_ALL_SECTIONS(list);
 #endif

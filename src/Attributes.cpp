@@ -24,9 +24,9 @@ struct Attributes {
                 temp = temp->next;
             }
 
-            free(attrib->value);
-            free(attrib->name);
-            free(attrib);
+            delete[] attrib->value;
+            delete[] attrib->name;
+            delete attrib;
             return newHead;
         }
         while (temp != NULL) {
@@ -34,9 +34,9 @@ struct Attributes {
                 if (temp->next != NULL) {
                     temp->next = temp->next->next;
                 }
-                free(attrib->name);
-                free(attrib->value);
-                free(attrib);
+                delete[] attrib->name;
+                delete[] attrib->value;
+                delete attrib;
                 return head;
             }
             temp = temp->next;
@@ -49,9 +49,9 @@ struct Attributes {
         bool exists = false;
         while (temp != NULL) {
             if (strcmp(temp->name, attrib->name) == 0) {
-                free(temp->value);
+                delete[] temp->value;
                 temp->value = attrib->value;
-                free(attrib->name);
+                delete[] attrib->name;
                 exists = true;
                 break;
             }

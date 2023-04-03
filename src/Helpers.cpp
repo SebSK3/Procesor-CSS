@@ -45,7 +45,7 @@ inline bool isInside(char c, const char *arr) {
 inline char *buildString(char *builder, int &length) {
     builder[length] = '\0';
     char *stripped = strstrip(builder);
-    char *temp = (char *)malloc(sizeof(char) * (strlen(stripped) + 1));
+    char *temp = new char[strlen(stripped)+1];
     strcpy(temp, stripped);
     length = 0;
     return temp;
@@ -55,7 +55,16 @@ inline void appendToResult(char ***result, char *string, int &resultSize) {
     if (strlen(string) == 0) {
         return;
     }
-    *result = (char **)realloc(*result, sizeof(char *) * (resultSize + 2));
+    if (resultSize >= MAX_DEFAULT_TOKENS-2) {    
+        char **newResult = new char*[MAX_DEFAULT_TOKENS + (REALLOC_TOKENS * (resultSize % REALLOC_TOKENS))];
+        int i=0;
+        while ((*result)[i] != NULL) {
+            newResult[i] = (*result)[i];
+            i++;
+        }
+        delete *result;
+        *result = newResult;
+    }
     if (result == NULL) {
         exit(-1);
     }
@@ -78,26 +87,24 @@ inline bool tokenIsAttribute(char **tokens, int length, int i) {
 }
 
 inline char *SelectorName(char *in1, char *in2, char *in3) {
-    char *out = (char *)malloc(sizeof(char) *
-                               (strlen(in1) + strlen(in2) + strlen(in3) + 1));
+    char *out = new char[strlen(in1) + strlen(in2) + strlen(in3) + 1];
     strcpy(out, in1);
     strcat(out, in2);
     strcat(out, in3);
-    free(in1);
-    free(in2);
-    free(in3);
+    delete[] in1;
+    delete[] in2;
+    delete[] in3;
     return out;
 }
 
 inline char *AppendSelectorName(char *selectorName, char *in1, char *in2) {
-    char *out = (char *)malloc(
-        sizeof(char) * (strlen(selectorName) + strlen(in1) + strlen(in2) + 1));
+    char *out = new char[strlen(selectorName) + strlen(in1)+ strlen(in2) + 1];
     strcpy(out, selectorName);
     strcat(out, in1);
     strcat(out, in2);
-    free(selectorName);
-    free(in1);
-    free(in2);
+    delete[] selectorName;
+    delete[] in1;
+    delete[] in2;
     return out;
 }
 
@@ -128,10 +135,10 @@ inline char *buildSelectorName(char **tokens, int tokensLength, int &i) {
 inline void FreeTokens(char **tokens) {
     int i=0;
     while (tokens[i] != NULL) {
-        free(tokens[i]);
+        delete[] tokens[i];
         i++;
     }
-    free(tokens);
+    delete[] tokens;
 }
 
 #ifdef DEBUG
