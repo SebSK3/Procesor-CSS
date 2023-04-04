@@ -77,30 +77,6 @@ inline bool tokenIsAttribute(char **tokens, int length, int i) {
     return false;
 }
 
-inline char *SelectorName(char *in1, char *in2, char *in3) {
-    char *out = (char *)malloc(sizeof(char) *
-                               (strlen(in1) + strlen(in2) + strlen(in3) + 1));
-    strcpy(out, in1);
-    strcat(out, in2);
-    strcat(out, in3);
-    free(in1);
-    free(in2);
-    free(in3);
-    return out;
-}
-
-inline char *AppendSelectorName(char *selectorName, char *in1, char *in2) {
-    char *out = (char *)malloc(
-        sizeof(char) * (strlen(selectorName) + strlen(in1) + strlen(in2) + 1));
-    strcpy(out, selectorName);
-    strcat(out, in1);
-    strcat(out, in2);
-    free(selectorName);
-    free(in1);
-    free(in2);
-    return out;
-}
-
 inline void FreeTokens(char **tokens) {
     int i=0;
     while (tokens[i] != NULL) {
