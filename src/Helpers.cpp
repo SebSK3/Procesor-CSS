@@ -101,31 +101,6 @@ inline char *AppendSelectorName(char *selectorName, char *in1, char *in2) {
     return out;
 }
 
-inline char *buildSelectorName(char **tokens, int tokensLength, int &i) {
-    char *name = NULL;
-
-    bool foundColon = false;
-    /* Check if it's selector with ':', then build whole selector */
-    if (i + 2 < tokensLength && (*tokens[i] == ':' || *tokens[i + 1] == ':'))
-        while (i + 2 < tokensLength && (*tokens[i + 1] == ':' || *tokens[i+2] == ':')) {
-            
-
-            if (name != NULL) {
-                i++;
-                name = AppendSelectorName(name, tokens[i], tokens[i + 1]);
-                i = i + 1;
-            } else {
-                name = SelectorName(tokens[i], tokens[i + 1], tokens[i + 2]);
-                i = i + 2;
-            }
-            foundColon = true;
-        }
-    if (!foundColon) {
-        name = tokens[i];
-    }
-    return name;
-}
-
 inline void FreeTokens(char **tokens) {
     int i=0;
     while (tokens[i] != NULL) {

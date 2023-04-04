@@ -67,7 +67,6 @@ void CSS::Extract(char **tokens, int tokensLength) {
 
                 Selectors *selector = (Selectors *)malloc(sizeof(Selectors));
                 selector->name = tokens[i];
-                // selector->name = buildSelectorName(tokens, tokensLength, i);
 
                 /* If selector doesn't exist, then this selector is the head */
                 if (currentSection->selectors == NULL) {
