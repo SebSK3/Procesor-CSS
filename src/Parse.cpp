@@ -26,7 +26,7 @@ char **Parse::tokenize(char *input, const char *keychars, bool insideBrackets) {
         bool isDelimiter = isInside(input[charIndex], delimiters);
         bool isKeychar = isInside(input[charIndex], keychars);
 
-        if (isKeychar) {
+        if (isKeychar || (input[charIndex] == ':' && insideBrackets)) {
             /*  If builderIndex > 0, then there is still word
              *   in builder buffer, so
              *   append it to result

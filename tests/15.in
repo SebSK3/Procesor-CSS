@@ -1,0 +1,10 @@
+.ms-TextField.is-required::-webkit-input-placeholder:after,
+.ms-TextField.is-required::-moz-placeholder:after,
+.ms-TextField.is-required:-moz-placeholder:after,
+.ms-TextField.is-required:-ms-input-placeholder:after {
+  content: ' *';
+  color: #a80000;
+}
+????
+?
+1,S,?

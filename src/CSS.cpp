@@ -6,7 +6,7 @@ CSS::CSS() {
     cmd = new (cmd) CMD(this);
     currentSection = NULL;
     insideBlock = false;
-    list = (DoubleLinkedList*)malloc(sizeof(DoubleLinkedList));
+    list = new DoubleLinkedList;
     list->init();
     currentList = list;
     currentSection = &(list->sections[0]);
@@ -18,7 +18,7 @@ CSS::~CSS() {
         DoubleLinkedList *deletingList = temp;
         temp->empty();
         temp = temp->next;
-        free(deletingList);
+        delete deletingList;
     }
     free(cmd);
 }
@@ -66,7 +66,8 @@ void CSS::Extract(char **tokens, int tokensLength) {
                 }
 
                 Selectors *selector = (Selectors *)malloc(sizeof(Selectors));
-                selector->name = buildSelectorName(tokens, tokensLength, i);
+                selector->name = tokens[i];
+                // selector->name = buildSelectorName(tokens, tokensLength, i);
 
                 /* If selector doesn't exist, then this selector is the head */
                 if (currentSection->selectors == NULL) {
@@ -157,6 +158,8 @@ void CSS::GetInput() {
 
     while ((c = getchar()) != EOF) {
         if (c != '\n' && c != EOF) {
+
+            if ((c > 10 || c < 10) && c < ' ') continue;
             appendToLine(&line, c, lineAllocs, i);
             continue;
         }
@@ -176,7 +179,7 @@ void CSS::GetInput() {
 
 void CSS::ParseCSS(char *input) {
 
-    const char *keychars = ":{};";
+    const char *keychars = "{};";
     char **tokenized = Parse::tokenize(input, keychars, insideBlock);
 
 #ifdef DEBUG

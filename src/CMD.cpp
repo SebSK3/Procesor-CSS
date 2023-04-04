@@ -237,16 +237,16 @@ void CMD::CheckForDeletion(DoubleLinkedList *list) {
             css->list = list->next;
             css->list->previous = NULL;
             list->empty();
-            free(list);
+            delete list;
         } else if (list->next == NULL && list->previous != NULL) {
             list->previous->next = NULL;
             list->empty();
-            free(list);
+            delete list;
         } else if (list->previous != NULL && list->next != NULL) {
             list->previous->next = list->next;
             list->next->previous = list->previous;
             list->empty();
-            free(list);
+            delete list;
         }
     }
 }

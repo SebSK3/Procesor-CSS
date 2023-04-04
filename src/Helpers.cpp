@@ -107,7 +107,8 @@ inline char *buildSelectorName(char **tokens, int tokensLength, int &i) {
     bool foundColon = false;
     /* Check if it's selector with ':', then build whole selector */
     if (i + 2 < tokensLength && (*tokens[i] == ':' || *tokens[i + 1] == ':'))
-        while (i + 2 < tokensLength && *tokens[i + 1] == ':') {
+        while (i + 2 < tokensLength && (*tokens[i + 1] == ':' || *tokens[i+2] == ':')) {
+            
 
             if (name != NULL) {
                 i++;
